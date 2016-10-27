@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/64e780546b9a6de3c9ca4594e73c8fde2bb8218d/ui-router-extras/ui-router-extras.d.ts",
+    "raw": "registry:dt/ui-router-extras#0.0.14+20160628180949",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/64e780546b9a6de3c9ca4594e73c8fde2bb8218d/ui-router-extras/ui-router-extras.d.ts"
+  }
+}

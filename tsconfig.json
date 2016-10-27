@@ -1,0 +1,11 @@
+{ 
+    "compileonSave" : false, 
+    "compilerOptions" : { 
+        "noImplicitAny": false, 
+        "suppressImplicitAnyIndexErrors": true, 
+        "module": "amd", 
+        "target": "ES6",
+        "sourceMap": true 
+    },  
+    "exclude": ["node_modules"]
+}  
