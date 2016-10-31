@@ -71,6 +71,7 @@ export default class PriceStreamSvc {
         }
     }
 
+
     public Connect(): ng.IPromise<{}> {
 
         let defer = this.$q.defer();  // -- Why isn't $q being injected (we had to new up an instance)!!!
