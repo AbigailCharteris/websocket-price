@@ -20,6 +20,7 @@
 	li a:hover {
 		background-color: #111111;
 	}
+	
 </style>
 <div class="panel panel-default">
 	<!-- Default panel contents -->
@@ -28,12 +29,13 @@
 			<li style="width:100px">Price: {{ctrl.price | currency:$:4}}</li>
 			<li><input type="button" style="width:100px" ng-click="ctrl.GetPrices()" value="Stream"></li>
 			<li><input type="button" style="width:100px" ng-click="ctrl.StopStreaming()" value="Stop"></li>
+			<li><input type="button" style="width:100px" ng-click="ctrl.ClearHistory()" value="Clear History"></li>
 		</ul>
 	</div>
 	<div class="panel-body">
 		<p>Price History</p>
 
-		<table class="table" ng-repeat="p in ctrl.priceHistory">
+		<table class="table table-responsive" ng-repeat="p in ctrl.priceHistory">
 			<tr>
 				<td>{{p | currency:$:4}}</td>
 			</tr>

@@ -46,6 +46,7 @@ export default class TickerCtrl {
         //         this.price = response;
         //         this.price = "1.4";
         //     });
+        this.priceHistory = this.LoadPriceHistory();
     }
 
 
@@ -64,6 +65,7 @@ export default class TickerCtrl {
 
     public StopStreaming() {
         this.ws.close();
+        this.StorePriceHistory(this.price);
         // this.priceHistory.push(this.price);
         // this.priceStreamingService.StopStream();
         // this.priceStreamingService.StorePriceHistory(this.priceHistory);
@@ -72,6 +74,11 @@ export default class TickerCtrl {
     public GetPrices() {
         this.Connect();
     }
+
+public ClearHistory() {
+    this.localStorageService.clearAll();
+    this.priceHistory = [];
+}
 
 
 // ####################  SERIVE CODE #######################################
@@ -114,7 +121,21 @@ export default class TickerCtrl {
         return defer.promise;
     };
 
+    public LoadPriceHistory(): string[] {
+        // return ["1.5123", "1.5211", "1.5268", "1.5012", "1.5234"];
+        let storePrices = this.localStorageService.get<string[]>("prices");
+        if (storePrices === null) {
+            storePrices = [];
+        }
 
+        return storePrices;
+    }
+
+    // public StorePriceHistory(priceHistory: string[]): void {
+    public StorePriceHistory(price: string): void {
+        this.priceHistory.push(price);
+        this.localStorageService.set("prices", this.priceHistory);
+    }
 
 
     // ##############  PROMISE EXAMPLES ######################

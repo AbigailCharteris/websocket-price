@@ -22,6 +22,7 @@ define(["require", "exports", "../../services/PriceStreamService"], function (re
             //         this.price = response;
             //         this.price = "1.4";
             //     });
+            this.priceHistory = this.LoadPriceHistory();
         }
         static get fullName() {
             return "TickerCtrl";
@@ -45,12 +46,16 @@ define(["require", "exports", "../../services/PriceStreamService"], function (re
         // }
         StopStreaming() {
             this.ws.close();
+            this.StorePriceHistory(this.price);
             // this.priceHistory.push(this.price);
             // this.priceStreamingService.StopStream();
             // this.priceStreamingService.StorePriceHistory(this.priceHistory);
         }
         GetPrices() {
             this.Connect();
+        }
+        ClearHistory() {
+            this.localStorageService.clearAll();
         }
         Connect() {
             let defer = this.$q.defer();
@@ -80,14 +85,20 @@ define(["require", "exports", "../../services/PriceStreamService"], function (re
             return defer.promise;
         }
         ;
-        // private listener(defer: ng.IDeferred<string>, scope: ng.IScope, data): void {
-        //     //let defer = this.$q.defer();
-        //     let messageObj = data;
-        //     console.log("Received data from websocket: ", messageObj);
-        //     this.price = data;
-        //     scope.$apply(this.price = data);
-        //     defer.resolve(data);
-        // }
+        LoadPriceHistory() {
+            // return ["1.5123", "1.5211", "1.5268", "1.5012", "1.5234"];
+            let storePrices = this.localStorageService.get("prices");
+            if (storePrices === null) {
+                storePrices = [];
+            }
+            return storePrices;
+        }
+        // public StorePriceHistory(priceHistory: string[]): void {
+        StorePriceHistory(price) {
+            this.priceHistory.push(price);
+            this.localStorageService.set("prices", this.priceHistory);
+        }
+        // ##############  PROMISE EXAMPLES ######################
         StreamPricesSingle(id) {
             let defer = this.$q.defer();
             let uri = "http://localhost:51633/api/products";
