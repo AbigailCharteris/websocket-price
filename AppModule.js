@@ -1,6 +1,5 @@
 define(["require", "exports", "angular", "partials/ticker/TickerModule"], function (require, exports, angular, TickerModule_1) {
     "use strict";
-    // let module = angular.module("bakerTechApp", ["ui.router", "ngWebSocket", tickerModule.name]);
     let module = angular.module("bakerTechApp", ["ui.router", "LocalStorageModule", TickerModule_1.default.name]);
     module.config(["$locationProvider", "$stateProvider", "$urlRouterProvider",
         function ($locationProvider, $stateProvider, $urlRouterProvider) {

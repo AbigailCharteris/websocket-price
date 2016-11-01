@@ -7,10 +7,9 @@ import * as uiBootstrap from "angular-ui-bootstrap";
 
 import tickerModule from "partials/ticker/TickerModule";
 
-// let module = angular.module("bakerTechApp", ["ui.router", "ngWebSocket", tickerModule.name]);
 let module = angular.module("bakerTechApp", ["ui.router", "LocalStorageModule", tickerModule.name]);
 
- module.config(["$locationProvider", "$stateProvider", "$urlRouterProvider",
+module.config(["$locationProvider", "$stateProvider", "$urlRouterProvider",
             function ($locationProvider: ng.ILocationProvider, $stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
                 $locationProvider.html5Mode({
                     enabled: true,

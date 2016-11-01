@@ -1,10 +1,15 @@
 define(["require", "exports", "./tickerCtrl"], function (require, exports, tickerCtrl_1) {
     "use strict";
-    // import PriceTickerDirective from "../../services/price-ticker-directive";
+    // import PriceStreamSvc from "../../services/PriceStreamService";
+    // import TickerService from "./tickerService";
     let module = angular.module("tickerModule", []);
-    //PriceStreamSvc.Register(module);
+    // PriceStreamSvc.Register(module);
+    // TickerService.Register(module);
     tickerCtrl_1.default.Register(module);
-    // PriceTickerDirective.Register(module);
+    // TickerService.$inject = ["$rootScope", "$state", "$log", "$http", "$q"];
+    // module.service(TickerService.fullName, TickerService);
+    // TickerController.$inject = ["$scope", "$rootScope", "$state", "$log", "$http", "$q", TickerService.fullName];
+    // module.controller(TickerController.fullName, TickerController);
     module.config(["$stateProvider", ($stateProvider) => {
             $stateProvider
                 .state("ticker", {

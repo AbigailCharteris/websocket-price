@@ -1,19 +1,25 @@
-define(["require", "exports", "../../services/PriceStreamService"], function (require, exports, PriceStreamService_1) {
+define(["require", "exports", "lodash"], function (require, exports, _) {
     "use strict";
     // import PriceTickerDirective from "../../services/price-ticker-directive";
+    // import TickerService from "./tickerService";
+    // let localStorageService: ng.local.storage.ILocalStorageService = require("LocalStorageModule");
     class TickerCtrl {
         //    constructor(private $scope: ng.IScope, $log: ng.ILogService, priceStreamService: PriceStreamService) {  // --> can't inject PriceStreamService!??!!
         constructor($scope, $rootScope, $state, $log, $http, $q, localStorageService) {
-            //this.priceStreamingService = new PriceStreamSvc($scope, $rootScope, $state, $log, $q, localStorageService);
-            // this.StreamPrices("1").then(response => {
-            //     console.log(response);
-            // });
+            //    , private priceStreamService: PriceStreamSvc) {
+            //this.localStorageService = localStorage;
+            // console.log("Ticker Service: " + this.tickerService);
             this.$scope = $scope;
             this.$rootScope = $rootScope;
             this.$state = $state;
             this.$http = $http;
             this.$q = $q;
             this.localStorageService = localStorageService;
+            // console.log("localStorage: " + this.localStorageService);
+            // this.priceStreamingService = new PriceStreamSvc($scope, $rootScope, $state, $log, $q, localStorageService);
+            // this.StreamPrices("1").then(response => {
+            //     console.log(response);
+            // });
             // this.StreamPricesChain("2").then(response => {
             //     console.log(response);
             // })
@@ -23,16 +29,20 @@ define(["require", "exports", "../../services/PriceStreamService"], function (re
             //         this.price = "1.4";
             //     });
             this.priceHistory = this.LoadPriceHistory();
+            // this.tickerService.DoSomething();
         }
         static get fullName() {
             return "TickerCtrl";
         }
+        //private localStorageService: ng.local.storage.ILocalStorageService;
         get DisplayMsg() {
             return this.msg;
         }
         ;
         static Register(module) {
-            module.controller(TickerCtrl.fullName, ["$scope", "$rootScope", "$state", "$log", "$http", "$q", "angular.local.storage", PriceStreamService_1.default.fullName, TickerCtrl]);
+            //        module.controller(TickerCtrl.fullName, ["$scope", "$rootScope", "$state", "$log", "$http", "$q", "angular.local.storage", PriceStreamSvc.fullName, TickerCtrl]);
+            module.controller(TickerCtrl.fullName, ["$scope", "$rootScope", "$state", "$log", "$http", "$q", "angular.local.storage", TickerCtrl]);
+            //        module.controller(TickerCtrl.fullName, ["$scope", "$rootScope", "$state", "$log", "$http", "$q", "angular.local.storage", TickerService.fullName, TickerCtrl]);
             //module.controller(TickerCtrl.fullName, []);
         }
         // public GetPrices() {
@@ -55,7 +65,9 @@ define(["require", "exports", "../../services/PriceStreamService"], function (re
             this.Connect();
         }
         ClearHistory() {
+            //this.localStorageService.clearAll();
             this.localStorageService.clearAll();
+            this.priceHistory = [];
         }
         Connect() {
             let defer = this.$q.defer();
